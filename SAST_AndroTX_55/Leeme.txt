@@ -1,0 +1,17 @@
+
+
+Analizador estático de APK con severidad/reportes.
+
+- Analiza AndroidManifest.xml a través de bibliotecas disponibles (androguard, apkutils2, pyaxmlparser) y recurre elegantemente al escaneo sin procesar.
+- OWASP Mobile Top 10 y las verificaciones adicionales, además de CLI para escanear archivos .apk o directorios.
+- Herramienta SAST de APK de Android que refleja el estilo de tu SAST_snake.py: severidades, hallazgos por línea con fragmentos de código, categoría OWASP y consejos de remediación.
+- Analiza APKs usando múltiples backends si están disponibles (androguard, apkutils2, pyaxmlparser) y recurre elegantemente al escaneo ZIP sin procesar. Analiza AndroidManifest.xml y archivos de texto candidatos bajo assets/, res/xml/, res/raw/, META-INF/, etc.
+- Las verificaciones incluyen OWASP Mobile Top 10 2024 (M1–M10) más elementos adicionales: Filtración de Datos, Secretos Codificados, Control de Acceso Inseguro, Traversal de Rutas/Sobrescritura, Endpoints Desprotegidos, Compartición Insegura.
+- Evita coincidencias ruidosas eliminando comentarios y limitándose a archivos de texto candidatos.
+- Se consideró el riesgo de falsos positivos y el contexto de intención maliciosa en los patrones y orientación.
+
+```bash
+python SAST_AndroTX_55.py ruta\al\apk_o_directorio -f text
+# o JSON
+python SAST_AndroTX_55.py ruta\al\apk_o_directorio -f json -o reporte.json
+```
