@@ -1,0 +1,48 @@
+🎯 SAST_AndroTX_55 v1.2 - Mejoras Clave
+
+ 1. Filtrado de Archivos Mejorado
+- Exclusión de archivos binarios: Lista completa de extensiones binarias (fuentes, imágenes, audio, video, archivos comprimidos, etc.)
+- Detección inteligente de archivos: Omite automáticamente `.ttf`, `.png`, `.mp3` y otros recursos binarios
+- Escaneo dirigido: Solo procesa archivos de texto/código reales
+
+ 2. Detección Mejorada de Path Traversal
+- Patrones conscientes del contexto: Busca operaciones reales de archivos como `File()`, `openFileOutput()`, etc.
+- Validación de extensiones de archivo: Requiere extensiones de archivo o llamadas a métodos específicos
+- Reducción de ruido: No más falsos positivos por `..` aleatorios en datos binarios
+
+ 3. Detección de Archivos Binarios
+- Análisis de contenido: Detecta archivos binarios verificando bytes nulos y caracteres no imprimibles
+- Umbrales inteligentes: Omite archivos con >10% de bytes nulos o >30% de caracteres no imprimibles
+- Previene coincidencias de regex: Evita que los patrones se ejecuten en datos binarios
+
+ 4. Coincidencia de Patrones Consciente del Contexto
+- Detección de archivos de código: Distingue entre código y otros archivos de texto
+- Filtrado de falsos positivos: Múltiples capas de verificaciones de contexto
+- Lógica específica por regla: Diferentes reglas aplican diferentes requisitos de contexto
+
+ 5. Filtros de Post-Procesamiento
+- Limpieza final: Elimina falsos positivos obvios después de la detección
+- Filtrado de datos binarios: Omite hallazgos que parecen datos binarios
+- Validación de fragmentos significativos: Asegura que los fragmentos de código sean realmente significativos
+
+ Uso
+```bash
+# Escanear un solo APK
+python SAST_AndroTX_55_v1.2.py app.apk
+
+# Escanear directorio de APKs
+python SAST_AndroTX_55_v1.2.py /path/to/apks/
+
+# Generar reporte JSON
+python SAST_AndroTX_55_v1.2.py app.apk --format json --output report.json
+
+# Salida detallada
+python SAST_AndroTX_55_v1.2.py app.apk --verbose
+```
+
+ ✅ Resultados Esperados
+La versión v1.2 ahora debería producir:
+- Sin falsos positivos en archivos de fuentes (archivos `.ttf` excluidos)
+- Detección precisa de path traversal (solo operaciones reales de archivos)
+- Hallazgos limpios y significativos (sin ruido de datos binarios)
+- Resultados conscientes del contexto (apropiados para archivos de código reales)
